@@ -33,3 +33,28 @@ if (isset($_POST['simpan'])) {
     header('Location: kategori.php');
     exit();
 }
+// Proses penghapusan kategori 
+if (isset($_POST['delete'])) {
+    // Mengambil ID kategori dari parameter URL
+    $catID = $_POST['catID']; 
+
+    // Query untuk menghapus kategori berdasarkan ID
+    $exec = mysqli_query($conn,"DELETE FROM categories WHERE category_id='$catID'");
+
+    // Menyimpan notifikasi keberhasilan atau kegagalan ke dalam session
+    if ($exec) {
+        $_SESSION['notification'] = [
+            'type' => 'primary',
+            'message' => 'Kategori berhasil dihapus!'
+        ];
+    } else {
+        $_SESSION['notification'] = [
+            'type' => 'danger',
+            'message' => 'Gagal menghapus kategori: ' . mysqli_error($conn)
+        ];
+    }
+
+    // Redirect kembali ke halaman kategori
+    header('Location: kategori.php');
+    exit();
+}
