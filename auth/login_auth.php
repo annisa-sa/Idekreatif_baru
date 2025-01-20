@@ -32,3 +32,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'message' => 'Username atau Password salah'
             ];
         }
+    } else {
+        
+            $_SESSION['notification'] = [
+                'type' => 'danger',
+                'message' => 'Username atau Password salah'
+            ];
+    }
+    
+            header('Location: login.php');
+            exit();
+        }
+        $conn->close();
+        ?>
