@@ -11,37 +11,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-
+        // Verifikasi password
         if (password_verify($password, $row["password"])) {
-            $_SESSION["username"] = "username";
+            $_SESSION["username"] = $username;
             $_SESSION["name"] = $row["name"];
             $_SESSION["role"] = $row["role"];
             $_SESSION["user_id"] = $row["user_id"];
-
-            $_SESSION['notification'] = [
+            // Set notifikasi selamat datang
+            $_SESSION["notification"] = [
                 'type' => 'primary',
                 'message' => 'Selamat Datang Kembali!'
             ];
-
+            // Redirect ke dashboard
             header('Location: ../dashboard.php');
             exit();
         } else {
-            
-            $_SESSION['notification'] = [
+            // Password salah
+            $_SESSION["notification"] = [
                 'type' => 'danger',
                 'message' => 'Username atau Password salah'
             ];
-        }
-    } else {
-        
-            $_SESSION['notification'] = [
-                'type' => 'danger',
-                'message' => 'Username atau Password salah'
-            ];
-    }
-    
-            header('Location: login.php');
-            exit();
-        }
-        $conn->close();
-        ?>
+        }   
+} else {
+    // Username tidak ditemukan
+    $_SESSION['notification'] = [
+        'type' => 'danger',
+        'message' => 'Username atau Password salah'
+    ];
+}
+
+    header('Location: login.php');
+    exit();
+}
+$conn->close();
+?>
