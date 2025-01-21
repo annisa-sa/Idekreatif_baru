@@ -38,3 +38,20 @@ include '.includes/header.php';
     ?>
     </select>
     </div>
+    <!-- textarea untuk konten postingan-->
+ <div class="mb-3">
+    <label for="content" class="form-label">konten</label>
+    <textarea class="form-control" id="content" name="content" required></textarea>
+    </div>
+    <!-- tombol sumbit-->
+     <button type="submit" name="simpan" class="btn btn-primary">simpan</button>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <?php
+    //menyertakan footer halaman 
+    include '.includes/footer.php';
+    ?>
