@@ -21,3 +21,20 @@ include '.includes/header.php';
     <label for="formfile" class="form-label">unggah gambar</label>
     <input class="form-control" type="file" name="image" accept="image/*"/>
 </div>
+<!--dropdown untuk memilih kategori-->
+<div class="mb-3">
+    <label for="category_id" class="form-label">kategori</label>
+    <select class="form-select" name="category_id" required>
+        <!--mengambil data kategori dari database untuk mengisi
+         opsi dropdown-->
+        <option value="" selected disabled>pilih salah satu</option>
+        <?php
+        $query = "SELECT * FROM categories"; //query untuk mengambil data kategori
+        $result = $conn->query($query); //menjalankan query if($result->num_rows>0) { //jika terdapat data kategori
+        while($row=$result->fetch_assoc()) { //iterasi setiap kategori
+            echo "<option value='" . $row["category_id"] . "'>"
+            . $row["category_name"] . "</option";
+        }
+    ?>
+    </select>
+    </div>
